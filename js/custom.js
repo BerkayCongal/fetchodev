@@ -4,12 +4,10 @@ const postSlug = document.querySelector("#post-slug");
 const commentForm = document.querySelector('.comment form');
 const baseurl = "http://localhost:1337/api/"
 
-
 async function getPosts() {
 let posts = await fetch("http://localhost:1337/api/posts?populate=*")
   .then(response => response.json())
   loadPage(posts.data)
-  
 }
 
 function loadPage(posts)  {
@@ -63,8 +61,6 @@ function loadPage(posts)  {
    
 }
 
-
-
 const createComments = async () => {
     let comments = await fetch('http://localhost:1337/api/comments').then(comment => comment.json())
     comments.data.forEach( element => {
@@ -77,15 +73,11 @@ const createComments = async () => {
     });
 } 
 
-
 commentForm.addEventListener('submit', function (e) {
-
     e.preventDefault();
     const formData = new FormData(commentForm);
     const formObj = Object.fromEntries(formData);
     formObj.post = 1;
-
-
     fetch('http://localhost:1337/api/comments', {
         method: 'POST',
         body: JSON.stringify({ data: formObj }),
